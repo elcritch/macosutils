@@ -6,6 +6,7 @@
 # To run these tests, simply execute `nimble test`.
 
 import unittest
+import std/strutils
 
 import macosutils/cfcore
 import macosutils/fsstream
@@ -30,6 +31,7 @@ suite "macos utils":
     echo "cfAllocRef: ", cfAllocRef.repr
     check not cfAllocRef.pointer.isNil
   test "fstream":
-    check cast[uint32]({kFSEventStreamEventFlagMustScanSubDirs}) == 0x00000001
+    check {kFSEventStreamEventFlagMustScanSubDirs}.flagsInt(uint32).toHex() == "00000001"
+    check {kFSEventStreamEventFlagItemIsFile}.flagsInt(uint32).toHex() == "00010000"
 
 

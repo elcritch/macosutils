@@ -21,6 +21,9 @@ const
 let
   kCFRunLoopDefaultMode* {.importc, extern: "kCFRunLoopDefaultMode".}: CFRunLoopMode
 
+template flagsInt*[F: set, I: SomeInteger](flags: F, tp: typedesc[I] = typedesc[uint64]): I =
+  cast[I](flags)
+
 # Core Foundation Functions
 proc CFStringCreateWithCString*(
   alloc: CFAllocatorRef, 

@@ -14,30 +14,33 @@ type
     kFSEventStreamCreateFlagUseExtendedData
     kFSEventStreamCreateWithDocID
 
-  FSEventStreamEventFlags* = enum
-    kFSEventStreamEventFlagMustScanSubDirs
-    kFSEventStreamEventFlagUserDropped
-    kFSEventStreamEventFlagKernelDropped
-    kFSEventStreamEventFlagEventIdsWrapped
-    kFSEventStreamEventFlagHistoryDone
-    kFSEventStreamEventFlagRootChanged
-    kFSEventStreamEventFlagMount
-    kFSEventStreamEventFlagUnmount
-    kFSEventStreamEventFlagItemChangeOwner
-    kFSEventStreamEventFlagItemCreated
-    kFSEventStreamEventFlagItemFinderInfoMod
-    kFSEventStreamEventFlagItemInodeMetaMod
-    kFSEventStreamEventFlagItemIsDir
-    kFSEventStreamEventFlagItemIsFile
-    kFSEventStreamEventFlagItemIsHardlink
-    kFSEventStreamEventFlagItemIsLastHardlink
-    kFSEventStreamEventFlagItemIsSymlink
-    kFSEventStreamEventFlagItemModified
-    kFSEventStreamEventFlagItemRemoved
-    kFSEventStreamEventFlagItemRenamed
-    kFSEventStreamEventFlagItemXattrMod
-    kFSEventStreamEventFlagOwnEvent
-    kFSEventStreamEventFlagItemCloned
+  FSEventStreamEventFlags* {.pure.} = enum
+    kFSEventStreamEventFlagMustScanSubDirs = 0      # 0x00000001 (1 << 0)
+    kFSEventStreamEventFlagUserDropped = 1          # 0x00000002 (1 << 1)
+    kFSEventStreamEventFlagKernelDropped = 2        # 0x00000004 (1 << 2)
+    kFSEventStreamEventFlagEventIdsWrapped = 3      # 0x00000008 (1 << 3)
+    kFSEventStreamEventFlagHistoryDone = 4          # 0x00000010 (1 << 4)
+    kFSEventStreamEventFlagRootChanged = 5          # 0x00000020 (1 << 5)
+    kFSEventStreamEventFlagMount = 6                # 0x00000040 (1 << 6)
+    kFSEventStreamEventFlagUnmount = 7              # 0x00000080 (1 << 7)
+    kFSEventStreamEventFlagItemCreated = 8          # 0x00000100 (1 << 8)
+    kFSEventStreamEventFlagItemRemoved = 9          # 0x00000200 (1 << 9)
+    kFSEventStreamEventFlagItemInodeMetaMod = 10    # 0x00000400 (1 << 10)
+    kFSEventStreamEventFlagItemRenamed = 11         # 0x00000800 (1 << 11)
+    kFSEventStreamEventFlagItemModified = 12        # 0x00001000 (1 << 12)
+    kFSEventStreamEventFlagItemFinderInfoMod = 13   # 0x00002000 (1 << 13)
+    kFSEventStreamEventFlagItemChangeOwner = 14     # 0x00004000 (1 << 14)
+    kFSEventStreamEventFlagItemXattrMod = 15        # 0x00008000 (1 << 15)
+    kFSEventStreamEventFlagItemIsFile = 16          # 0x00010000 (1 << 16)
+    kFSEventStreamEventFlagItemIsDir = 17           # 0x00020000 (1 << 17)
+    kFSEventStreamEventFlagItemIsSymlink = 18       # 0x00040000 (1 << 18)
+    kFSEventStreamEventFlagOwnEvent = 19            # 0x00080000 (1 << 19)
+    kFSEventStreamEventFlagItemIsHardlink = 20      # 0x00100000 (1 << 20)
+    kFSEventStreamEventFlagItemIsLastHardlink = 21  # 0x00200000 (1 << 21)
+    kFSEventStreamEventFlagItemCloned = 22          # 0x00400000 (1 << 22)
+
+    
+
 
   FSEventStreamContext* {.pure, final.} = object
     version*: CFIndex
