@@ -23,9 +23,13 @@ suite "macos utils":
     echo "backToNim: ", backToNim.repr  # Prints: Hello, World!
     check backToNim == nimStr
 
-  test "CFString":
+  test "cf allocator":
 
     # Function to create the allocator
     let cfAllocRef = createBasicDefaultCFAllocator()
     echo "cfAllocRef: ", cfAllocRef.repr
     check not cfAllocRef.pointer.isNil
+  test "fstream":
+    check cast[uint32]({kFSEventStreamEventFlagMustScanSubDirs}) == 0x00000001
+
+
