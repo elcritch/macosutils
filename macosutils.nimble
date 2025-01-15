@@ -1,6 +1,6 @@
 version       = "0.1.0"
 author        = "Jaremy Creechley"
-description   = "MacOS system utilities"
+description   = "MacOS/OSX system util wrappers for CFCore and the like"
 license       = "Apache-2.0"
 srcDir        = "src"
 
