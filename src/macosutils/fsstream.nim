@@ -1,3 +1,4 @@
+import cfcore
 
 type
   FSEventStreamRef* = distinct pointer
@@ -45,7 +46,7 @@ type
     release*: pointer
     copyDescription*: pointer
 
-type
+const
   kFSEventStreamEventIdSinceNow* = 0xFFFFFFFFFFFFFFFF'u64
 
   kFSEventStreamCreateFlagNone*: set[FSEventStreamCreateFlags] = {}
