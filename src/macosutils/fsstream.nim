@@ -52,8 +52,6 @@ const
   kFSEventStreamCreateFlagNone*: set[FSEventStreamCreateFlags] = {}
   kFSEventStreamEventFlagNone*: set[FSEventStreamEventFlags] = {}
   
-let kCFRunLoopDefaultMode* {.importc, extern: "kCFRunLoopDefaultMode".}: CFRunLoopMode
-
 # FSEvents Functions
 proc FSEventStreamCreate*(
   allocator: CFAllocatorRef, 
