@@ -8,5 +8,23 @@
 import unittest
 
 import macosutils
-test "can add":
-  check add(5, 5) == 10
+
+suite "macos utils":
+  test "CFString":
+    # Example usage with proper cleanup:
+    let nimStr = "Hello, World!"
+    let cfStr = nimStr.toCFString()
+    echo "nimStr: ", nimStr.repr
+    echo "cfStr: ", cfStr.repr
+    defer: CFRelease(cfStr.pointer)  # Clean up the CFStringRef
+    
+    let backToNim = cfStr.toString()
+    echo "backToNim: ", backToNim.repr  # Prints: Hello, World!
+    check backToNim == nimStr
+
+  test "CFString":
+
+    # Function to create the allocator
+    let cfAllocRef = createDefaultCFAllocator()
+
+    echo "cfAllocRef: ", cfAllocRef.repr
