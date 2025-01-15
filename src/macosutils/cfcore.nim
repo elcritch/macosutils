@@ -206,5 +206,3 @@ proc FSEventStreamStart*(streamRef: FSEventStreamRef): bool {.importc.}
 proc FSEventStreamStop*(streamRef: FSEventStreamRef) {.importc.}
 proc FSEventStreamInvalidate*(streamRef: FSEventStreamRef) {.importc.}
 proc FSEventStreamRelease*(streamRef: FSEventStreamRef) {.importc.}
-
-when isMainModule:
