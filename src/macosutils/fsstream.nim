@@ -83,3 +83,30 @@ proc FSEventStreamStart*(streamRef: FSEventStreamRef): bool {.importc.}
 proc FSEventStreamStop*(streamRef: FSEventStreamRef) {.importc.}
 proc FSEventStreamInvalidate*(streamRef: FSEventStreamRef) {.importc.}
 proc FSEventStreamRelease*(streamRef: FSEventStreamRef) {.importc.}
+
+proc createBasicDefaultCFAllocator*(): CFAllocatorRef =
+  proc dmonCfMalloc(allocSize: CFIndex, hint: CFOptionFlags, info: pointer): pointer {.cdecl.} =
+    result = alloc(allocSize.csize_t)
+
+  proc dmonCfFree(pt: pointer, info: pointer) {.cdecl.} =
+    if pt != nil:
+      dealloc(pt)
+
+  proc dmonCfRealloc(pt: pointer, newsize: CFIndex, hint: CFOptionFlags, 
+                    info: pointer): pointer {.cdecl.} =
+    result = realloc(pt, newsize.csize_t)
+
+  var ctx = CFAllocatorContext(
+    version: 0,
+    info: nil,
+    retain: nil,
+    release: nil,
+    copyDescription: nil,
+    allocate: dmonCfMalloc,
+    reallocate: dmonCfRealloc,
+    deallocate: dmonCfFree,
+    preferredSize: nil
+  )
+  
+  result = CFAllocatorCreate(nil.CFAllocatorRef, addr ctx)
+

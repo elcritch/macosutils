@@ -8,6 +8,7 @@
 import unittest
 
 import macosutils/cfcore
+import macosutils/fsstream
 
 suite "macos utils":
   test "CFString":
@@ -25,6 +26,6 @@ suite "macos utils":
   test "CFString":
 
     # Function to create the allocator
-    let cfAllocRef = createDefaultCFAllocator()
+    let cfAllocRef = createBasicDefaultCFAllocator()
 
     echo "cfAllocRef: ", cfAllocRef.repr
