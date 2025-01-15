@@ -85,16 +85,17 @@ proc FSEventStreamInvalidate*(streamRef: FSEventStreamRef) {.importc.}
 proc FSEventStreamRelease*(streamRef: FSEventStreamRef) {.importc.}
 
 proc createBasicDefaultCFAllocator*(): CFAllocatorRef =
+  ## creates a simple alloctor using Nim's standard allocators
   proc dmonCfMalloc(allocSize: CFIndex, hint: CFOptionFlags, info: pointer): pointer {.cdecl.} =
-    result = alloc(allocSize.csize_t)
+    result = allocShared0(allocSize.csize_t)
 
   proc dmonCfFree(pt: pointer, info: pointer) {.cdecl.} =
     if pt != nil:
-      dealloc(pt)
+      deallocShared(pt)
 
   proc dmonCfRealloc(pt: pointer, newsize: CFIndex, hint: CFOptionFlags, 
                     info: pointer): pointer {.cdecl.} =
-    result = realloc(pt, newsize.csize_t)
+    result = reallocShared(pt, newsize.csize_t)
 
   var ctx = CFAllocatorContext(
     version: 0,
