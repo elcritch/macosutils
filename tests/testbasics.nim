@@ -27,5 +27,5 @@ suite "macos utils":
 
     # Function to create the allocator
     let cfAllocRef = createBasicDefaultCFAllocator()
-
     echo "cfAllocRef: ", cfAllocRef.repr
+    check not cfAllocRef.pointer.isNil
