@@ -7,7 +7,7 @@
 
 import unittest
 
-import macosutils
+import macosutils/cfcore
 
 suite "macos utils":
   test "CFString":
