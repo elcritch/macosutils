@@ -4,7 +4,7 @@ type
   FSEventStreamRef* = distinct pointer
   FSEventStreamEventId* = culonglong
 
-  FSEventStreamCreateFlags* = cuint
+  FSEventStreamCreateFlags* = distinct cuint
   FSEventStreamCreateFlag* {.pure, size: sizeof(cuint).} = enum
     kFSEventStreamCreateFlagUseCFTypes
     kFSEventStreamCreateFlagNoDefer
@@ -16,7 +16,7 @@ type
     kFSEventStreamCreateFlagUseExtendedData
     kFSEventStreamCreateWithDocID
 
-  FSEventStreamEventFlags* = cuint
+  FSEventStreamEventFlags* = distinct cuint
   FSEventStreamEventFlag* {.pure, size: sizeof(cuint).} = enum
     kFSEventStreamEventFlagMustScanSubDirs = 0      # 0x00000001 (1 << 0)
     kFSEventStreamEventFlagUserDropped = 1          # 0x00000002 (1 << 1)

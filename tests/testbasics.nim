@@ -33,6 +33,10 @@ suite "macos utils":
 
   test "fstream enums":
 
+    let
+      f1: FSEventStreamEventFlags = {kFSEventStreamEventFlagMustScanSubDirs}.toBase()
+      s1: set[FSEventStreamEventFlag] = f1.toSet()
+
     # check FSEventStreamEventFlag
     check {kFSEventStreamEventFlagMustScanSubDirs}.toBase().toHex() ==   "00000001"
     check {kFSEventStreamEventFlagItemIsFile}.toBase().toHex() ==        "00010000"
