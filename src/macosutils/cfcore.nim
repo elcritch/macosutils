@@ -21,11 +21,22 @@ const
 let
   kCFRunLoopDefaultMode* {.importc, extern: "kCFRunLoopDefaultMode".}: CFRunLoopMode
 
-template toInt*[F; I: SomeInteger](flags: set[F], tp: typedesc[I]): I =
+template implEnumBases*[B: SomeInteger, E: enum](enums: typedesc[E], base: typedesc[B]) =
+  ## helps generate pairings for enum and base types
+  proc enumBase*(tp: typedesc[E]): B {.compileTime.} =
+    discard
+  proc enumSet*(tp: typedesc[B]): E {.compileTime.} =
+    discard
+
+template toInt*[F: enum, I: SomeInteger](flags: set[F], tp: typedesc[I]): I =
   cast[I](flags)
 
 template toBase*[F: enum](flags: set[F]): auto =
+  ## cast to base flag type automatically when a `enumBase` proc is provide
   cast[typeof(enumBase(F))](flags)
+
+template toSet*[I: SomeInteger](value: I): auto =
+  cast[typeof(enumSet(I))](flags)
 
 # Core Foundation Functions
 proc CFStringCreateWithCString*(

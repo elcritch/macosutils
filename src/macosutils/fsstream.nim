@@ -55,8 +55,9 @@ const
   kFSEventStreamCreateFlagNone*: set[FSEventStreamCreateFlag] = {}
   kFSEventStreamEventFlagNone*: set[FSEventStreamEventFlag] = {}
 
-proc enumBase*(tp: typedesc[FSEventStreamEventFlag]): FSEventStreamEventFlags =
-  discard
+
+implEnumBases(FSEventStreamCreateFlag, FSEventStreamCreateFlags)
+implEnumBases(FSEventStreamEventFlag, FSEventStreamEventFlags)
 
 proc toSet*(flags: FSEventStreamCreateFlags): set[FSEventStreamCreateFlag] =
   cast[set[FSEventStreamCreateFlag]](flags)
