@@ -34,15 +34,15 @@ suite "macos utils":
   test "fstream enums":
 
     let
-      f1: FSEventStreamEventFlags = {kFSEventStreamEventFlagMustScanSubDirs}.toBase()
+      f1: FSEventStreamEventFlags = {MustScanSubDirs}.toBase()
       s1: set[FSEventStreamEventFlag] = f1.toSet()
 
     # check FSEventStreamEventFlag
-    check {kFSEventStreamEventFlagMustScanSubDirs}.toBase().intBase.toHex() ==   "00000001"
-    check {kFSEventStreamEventFlagItemIsFile}.toBase().intBase.toHex() ==        "00010000"
-    check {kFSEventStreamEventFlagItemIsDir}.toBase().intBase.toHex() ==         "00020000"
-    check {kFSEventStreamEventFlagItemFinderInfoMod}.toBase().intBase.toHex() == "00002000"
-    check {kFSEventStreamEventFlagItemIsSymlink}.toBase().intBase.toHex() == "00040000"
+    check {MustScanSubDirs}.toBase().intBase.toHex() ==   "00000001"
+    check {ItemIsFile}.toBase().intBase.toHex() ==        "00010000"
+    check {ItemIsDir}.toBase().intBase.toHex() ==         "00020000"
+    check {ItemFinderInfoMod}.toBase().intBase.toHex() == "00002000"
+    check {ItemIsSymlink}.toBase().intBase.toHex() == "00040000"
 
 
 
