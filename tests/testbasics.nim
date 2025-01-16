@@ -32,19 +32,22 @@ suite "macos utils":
     check not cfAllocRef.pointer.isNil
 
   test "fstream enums":
-
     let
       f1: FSEventStreamEventFlags = {MustScanSubDirs}.toBase()
       s1: set[FSEventStreamEventFlag] = f1.toSet()
 
     # check FSEventStreamEventFlag
-    # check kFSEventStreamEventFlagMustScanSubDirs.toBase().intBase.toHex() ==   "00000001"
     check {FSEventStreamEventFlag.MustScanSubDirs}.toBase().intBase.toHex() ==   "00000001"
     check {MustScanSubDirs}.toBase().intBase.toHex() ==   "00000001"
     check {ItemIsFile}.toBase().intBase.toHex() ==        "00010000"
     check {ItemIsDir}.toBase().intBase.toHex() ==         "00020000"
     check {ItemFinderInfoMod}.toBase().intBase.toHex() == "00002000"
     check {ItemIsSymlink}.toBase().intBase.toHex() == "00040000"
+
+  test "check generated fields":
+    check kFSEventStreamEventFlagMustScanSubDirs.toBase().intBase.toHex() ==   "00000001"
+    check kFSEventStreamEventFlagMustScanSubDirs.toBase().intBase.toHex() ==   "00000001"
+
 
 
 

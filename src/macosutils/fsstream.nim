@@ -1,4 +1,5 @@
 import cfcore
+import utils
 
 type
   FSEventStreamRef* = distinct pointer
@@ -56,7 +57,9 @@ const
   kFSEventStreamEventFlagNone*: set[FSEventStreamEventFlag] = {}
 
 implEnumBases(FSEventStreamCreateFlag, FSEventStreamCreateFlags)
+genFieldsFromEnum(FSEventStreamCreateFlag)
 implEnumBases(FSEventStreamEventFlag, FSEventStreamEventFlags)
+genFieldsFromEnum(FSEventStreamEventFlag)
 
 # FSEvents Functions
 proc FSEventStreamCreate*(
