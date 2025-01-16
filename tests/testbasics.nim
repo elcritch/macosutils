@@ -35,6 +35,7 @@ suite "macos utils":
     check {kFSEventStreamEventFlagItemIsFile}.flagsInt(uint32).toHex() ==        "00010000"
     check {kFSEventStreamEventFlagItemIsDir}.flagsInt(uint32).toHex() ==         "00020000"
     check {kFSEventStreamEventFlagItemFinderInfoMod}.flagsInt(uint32).toHex() == "00002000"
+    check {kFSEventStreamEventFlagItemIsSymlink}.flagsInt(uint32).toHex() == "00040000"
 
 
 
