@@ -30,7 +30,8 @@ suite "macos utils":
     let cfAllocRef = createBasicDefaultCFAllocator()
     echo "cfAllocRef: ", cfAllocRef.repr
     check not cfAllocRef.pointer.isNil
-  test "fstream":
+
+  test "fstream enums":
     check {kFSEventStreamEventFlagMustScanSubDirs}.flagsInt(uint32).toHex() ==   "00000001"
     check {kFSEventStreamEventFlagItemIsFile}.flagsInt(uint32).toHex() ==        "00010000"
     check {kFSEventStreamEventFlagItemIsDir}.flagsInt(uint32).toHex() ==         "00020000"
