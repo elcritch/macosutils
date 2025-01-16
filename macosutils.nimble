@@ -1,4 +1,4 @@
-version       = "0.3.1"
+version       = "0.3.2"
 author        = "Jaremy Creechley"
 description   = "MacOS/OSX system util wrappers for CFCore and the like"
 license       = "Apache-2.0"
