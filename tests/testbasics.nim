@@ -38,11 +38,11 @@ suite "macos utils":
       s1: set[FSEventStreamEventFlag] = f1.toSet()
 
     # check FSEventStreamEventFlag
-    check {kFSEventStreamEventFlagMustScanSubDirs}.toBase().toHex() ==   "00000001"
-    check {kFSEventStreamEventFlagItemIsFile}.toBase().toHex() ==        "00010000"
-    check {kFSEventStreamEventFlagItemIsDir}.toBase().toHex() ==         "00020000"
-    check {kFSEventStreamEventFlagItemFinderInfoMod}.toBase().toHex() == "00002000"
-    check {kFSEventStreamEventFlagItemIsSymlink}.toBase().toHex() == "00040000"
+    check {kFSEventStreamEventFlagMustScanSubDirs}.toBase().intBase.toHex() ==   "00000001"
+    check {kFSEventStreamEventFlagItemIsFile}.toBase().intBase.toHex() ==        "00010000"
+    check {kFSEventStreamEventFlagItemIsDir}.toBase().intBase.toHex() ==         "00020000"
+    check {kFSEventStreamEventFlagItemFinderInfoMod}.toBase().intBase.toHex() == "00002000"
+    check {kFSEventStreamEventFlagItemIsSymlink}.toBase().intBase.toHex() == "00040000"
 
 
 

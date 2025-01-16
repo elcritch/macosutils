@@ -59,9 +59,6 @@ const
 implEnumBases(FSEventStreamCreateFlag, FSEventStreamCreateFlags)
 implEnumBases(FSEventStreamEventFlag, FSEventStreamEventFlags)
 
-proc toSet*(flags: FSEventStreamCreateFlags): set[FSEventStreamCreateFlag] =
-  cast[set[FSEventStreamCreateFlag]](flags)
-
 # FSEvents Functions
 proc FSEventStreamCreate*(
   allocator: CFAllocatorRef, 

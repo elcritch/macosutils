@@ -32,8 +32,12 @@ template toBase*[F: enum](flags: set[F]): auto =
   ## cast to base flag type automatically when a `enumBase` proc is provide
   cast[typeof(enumBase(F))](flags)
 
-template toSet*[I: SomeInteger](value: I): auto =
-  cast[typeof(enumSet(I))](value)
+template toSet*[I](value: I): auto =
+  cast[set[typeof(enumSet(I))]](value)
+
+import std/typetraits
+template intBase*[I](value: I): auto =
+  distinctBase(I)(value)
 
 # Core Foundation Functions
 proc CFStringCreateWithCString*(
