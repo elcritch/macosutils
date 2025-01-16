@@ -21,8 +21,11 @@ const
 let
   kCFRunLoopDefaultMode* {.importc, extern: "kCFRunLoopDefaultMode".}: CFRunLoopMode
 
-template flagsInt*[F: set, I: SomeInteger](flags: F, tp: typedesc[I] = typedesc[uint64]): I =
+template toInt*[F; I: SomeInteger](flags: set[F], tp: typedesc[I]): I =
   cast[I](flags)
+
+template toBase*[F: enum](flags: set[F]): auto =
+  cast[typeof(enumBase(F))](flags)
 
 # Core Foundation Functions
 proc CFStringCreateWithCString*(

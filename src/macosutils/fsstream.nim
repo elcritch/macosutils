@@ -3,7 +3,9 @@ import cfcore
 type
   FSEventStreamRef* = distinct pointer
   FSEventStreamEventId* = culonglong
-  FSEventStreamCreateFlags* = enum
+
+  FSEventStreamCreateFlags* = cuint
+  FSEventStreamCreateFlag* {.pure, size: sizeof(cuint).} = enum
     kFSEventStreamCreateFlagUseCFTypes
     kFSEventStreamCreateFlagNoDefer
     kFSEventStreamCreateFlagWatchRoot
@@ -14,7 +16,8 @@ type
     kFSEventStreamCreateFlagUseExtendedData
     kFSEventStreamCreateWithDocID
 
-  FSEventStreamEventFlags* {.pure.} = enum
+  FSEventStreamEventFlags* = cuint
+  FSEventStreamEventFlag* {.pure, size: sizeof(cuint).} = enum
     kFSEventStreamEventFlagMustScanSubDirs = 0      # 0x00000001 (1 << 0)
     kFSEventStreamEventFlagUserDropped = 1          # 0x00000002 (1 << 1)
     kFSEventStreamEventFlagKernelDropped = 2        # 0x00000004 (1 << 2)
@@ -39,9 +42,6 @@ type
     kFSEventStreamEventFlagItemIsLastHardlink = 21  # 0x00200000 (1 << 21)
     kFSEventStreamEventFlagItemCloned = 22          # 0x00400000 (1 << 22)
 
-    
-
-
   FSEventStreamContext* {.pure, final.} = object
     version*: CFIndex
     info*: pointer
@@ -52,9 +52,15 @@ type
 const
   kFSEventStreamEventIdSinceNow* = 0xFFFFFFFFFFFFFFFF'u64
 
-  kFSEventStreamCreateFlagNone*: set[FSEventStreamCreateFlags] = {}
-  kFSEventStreamEventFlagNone*: set[FSEventStreamEventFlags] = {}
-  
+  kFSEventStreamCreateFlagNone*: set[FSEventStreamCreateFlag] = {}
+  kFSEventStreamEventFlagNone*: set[FSEventStreamEventFlag] = {}
+
+proc enumBase*(tp: typedesc[FSEventStreamEventFlag]): FSEventStreamEventFlags =
+  discard
+
+proc toSet*(flags: FSEventStreamCreateFlags): set[FSEventStreamCreateFlag] =
+  cast[set[FSEventStreamCreateFlag]](flags)
+
 # FSEvents Functions
 proc FSEventStreamCreate*(
   allocator: CFAllocatorRef, 
@@ -63,15 +69,14 @@ proc FSEventStreamCreate*(
     clientCallBackInfo: pointer,
     numEvents: csize_t,
     eventPaths: pointer,
-    # eventFlags: ptr set[FSEventStreamEventFlags],
-    eventFlags: ptr set[FSEventStreamEventFlags],
+    eventFlags: ptr FSEventStreamEventFlags,
     eventIds: ptr FSEventStreamEventId,
   ) {.cdecl.},
   context: ptr FSEventStreamContext,
   pathsToWatch: CFArrayRef,
   sinceWhen: FSEventStreamEventId,
   latency: CFTimeInterval,
-  flags: set[FSEventStreamCreateFlags]
+  flags: FSEventStreamCreateFlags
 ): FSEventStreamRef {.importc.}
 
 proc FSEventStreamScheduleWithRunLoop*(

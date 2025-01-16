@@ -32,11 +32,13 @@ suite "macos utils":
     check not cfAllocRef.pointer.isNil
 
   test "fstream enums":
-    check {kFSEventStreamEventFlagMustScanSubDirs}.flagsInt(uint32).toHex() ==   "00000001"
-    check {kFSEventStreamEventFlagItemIsFile}.flagsInt(uint32).toHex() ==        "00010000"
-    check {kFSEventStreamEventFlagItemIsDir}.flagsInt(uint32).toHex() ==         "00020000"
-    check {kFSEventStreamEventFlagItemFinderInfoMod}.flagsInt(uint32).toHex() == "00002000"
-    check {kFSEventStreamEventFlagItemIsSymlink}.flagsInt(uint32).toHex() == "00040000"
+
+    # check FSEventStreamEventFlag
+    check {kFSEventStreamEventFlagMustScanSubDirs}.toBase().toHex() ==   "00000001"
+    check {kFSEventStreamEventFlagItemIsFile}.toBase().toHex() ==        "00010000"
+    check {kFSEventStreamEventFlagItemIsDir}.toBase().toHex() ==         "00020000"
+    check {kFSEventStreamEventFlagItemFinderInfoMod}.toBase().toHex() == "00002000"
+    check {kFSEventStreamEventFlagItemIsSymlink}.toBase().toHex() == "00040000"
 
 
 
