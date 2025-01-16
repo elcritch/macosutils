@@ -42,7 +42,7 @@ type
     kFSEventStreamEventFlagItemIsLastHardlink = 21  # 0x00200000 (1 << 21)
     kFSEventStreamEventFlagItemCloned = 22          # 0x00400000 (1 << 22)
 
-  FSEventStreamContext* {.pure, final.} = object
+  FSEventStreamContext* {.bycopy, final.} = object
     version*: CFIndex
     info*: pointer
     retain*: pointer
