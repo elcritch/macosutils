@@ -38,6 +38,7 @@ suite "macos utils":
       s1: set[FSEventStreamEventFlag] = f1.toSet()
 
     # check FSEventStreamEventFlag
+    # check kFSEventStreamEventFlagMustScanSubDirs.toBase().intBase.toHex() ==   "00000001"
     check {FSEventStreamEventFlag.MustScanSubDirs}.toBase().intBase.toHex() ==   "00000001"
     check {MustScanSubDirs}.toBase().intBase.toHex() ==   "00000001"
     check {ItemIsFile}.toBase().intBase.toHex() ==        "00010000"

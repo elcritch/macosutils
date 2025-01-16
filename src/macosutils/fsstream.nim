@@ -55,7 +55,6 @@ const
   kFSEventStreamCreateFlagNone*: set[FSEventStreamCreateFlag] = {}
   kFSEventStreamEventFlagNone*: set[FSEventStreamEventFlag] = {}
 
-
 implEnumBases(FSEventStreamCreateFlag, FSEventStreamCreateFlags)
 implEnumBases(FSEventStreamEventFlag, FSEventStreamEventFlags)
 
