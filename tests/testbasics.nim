@@ -31,7 +31,10 @@ suite "macos utils":
     echo "cfAllocRef: ", cfAllocRef.repr
     check not cfAllocRef.pointer.isNil
   test "fstream":
-    check {kFSEventStreamEventFlagMustScanSubDirs}.flagsInt(uint32).toHex() == "00000001"
-    check {kFSEventStreamEventFlagItemIsFile}.flagsInt(uint32).toHex() == "00010000"
+    check {kFSEventStreamEventFlagMustScanSubDirs}.flagsInt(uint32).toHex() ==   "00000001"
+    check {kFSEventStreamEventFlagItemIsFile}.flagsInt(uint32).toHex() ==        "00010000"
+    check {kFSEventStreamEventFlagItemIsDir}.flagsInt(uint32).toHex() ==         "00020000"
+    check {kFSEventStreamEventFlagItemFinderInfoMod}.flagsInt(uint32).toHex() == "00002000"
+
 
 
